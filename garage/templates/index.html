@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/styles/reset.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/styles/general.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/styles/header.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/styles/hero.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/styles/services.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/styles/footer.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/styles/about.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/styles/faq.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav class="nav-container">
+      <div class="logo-container">
+        <a href="#">
+          <img src="{% static 'assets/images/fastlane-logo.svg' %}" alt="fastlane-garage-logo">
+        </a>
+      </div>
+      <div class="toggle-menu-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/>
+        </svg>
+      </div>
+      <div class="navbar-links">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main-container">
+    <div class="hero">
+      <div class="hero-left">
+        <h1>Unleash Your Car's True Potential</h1>
+        <p id="paragraph">
+          Premium upgrades and personalized solutions
+          for every car enthusiast at FastLane Garage
+        </p>
+        <button id="button-text">
+          Book an Appointment
+        </button>
+      </div>
+      <div class="hero-right">
+        <img src="{% static 'assets/images/garage-bg-egor-myznik-unsplash.jpg' %}" alt="image of a garage">
+      </div>
+    </div>
+
+    <div class="services-container" id="services">
+      <h2 id="secondary-heading">Our Services</h2>
+      <div class="service-card">
+        <h3 class="card-title">Performance Exhausts and Intakes</h3>
+        <p class="card-description" id="paragraph">
+          Take your vehicle's power and sound with our high-performance exhaust and intake systems to another level. Achieve improved airflow, horsepower, and a bold, aggressive tone tailored to your driving needs
+        </p>
+      </div>
+
+      <div class="service-card">
+        <h3 class="card-title">Mechanical Services and Repairs</h3>
+        <p class="card-description" id="paragraph">
+            Expert mechanical services for all performance vehicles. From routine maintenance to complex repairs, we ensure your car operates at peak performance and reliability with precision and care
+          </p>
+      </div>
+
+      <div class="service-card">
+        <h3 class="card-title">Dent Repair and Painting</h3>
+        <p class="card-description" id="paragraph">
+          Restore your car’s aesthetics with our premium dent repair and custom painting services. From minor dings to full-bodywork, we bring your vehicle back to its pristine form.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <h3 class="card-title">Detailing and PPF</h3>
+        <p class="card-description" id="paragraph">
+          Protect and enhance your car's appearance with our detailing and Paint Protection Film (PPF) services. Enjoy a showroom shine and guard against scratches, chips, and environmental damage
+        </p>
+      </div>
+
+      <div class="service-card">
+        <h3 class="card-title">ECU Mapping</h3>
+        <p class="card-description" id="paragraph">
+          Optimize your car’s engine performance with our advanced ECU mapping services. Unleash greater power, improved fuel efficiency, and seamless driving dynamics tailored to your vehicle
+        </p>
+      </div>
+
+      <div class="service-card">
+        <h3 class="card-title">Dashcams</h3>
+        <p class="card-description" id="paragraph">
+          Drive with confidence using our professional dashcam installation services. Record every journey with high-quality video for enhanced safety, security, and peace of mind
+        </p>
+      </div>
+    </div>
+
+    <div class="about-section" id="about">
+      <h2>About Us</h2>
+      <div class="container">
+        <p class="description"  id="paragraph about">
+          We at FastLane Garage, are a trusted name in high-performance vehicle upgrades, specializing in transforming vehicles into masterpieces of style and power. Our extensive range of services includes performance part upgrades, custom vehicle modifications, premium car care, and expert maintenance solutions. We pride ourselves on delivering personalized solutions tailored to the unique needs of every car enthusiast, ensuring each vehicle is not only visually stunning but also optimized for peak performance. As a growing brand, our commitment to excellence drives us to provide exceptional service and top-tier products for our valued customers
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <div class="container">
+        <h2>Frequently Asked Questions</h2>
+        <div class="accordion">
+          <div class="accordion-item">
+            <button id="accordion-button-3" aria-expanded="false">
+              <span class="accordion-title">Where are you?</span>
+              <span class="icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-content">
+              <p id="paragraph">
+                All I got is gallon in the gas tank! I'm almost at the finish line so I cant stop now, I really dont know where I'm heading just enjoying the ride...
+              </p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button id="accordion-button-4" aria-expanded="false">
+              <span class="accordion-title">How expensive are parts?</span>
+              <span class="icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-content">
+              <p id="paragraph">
+                How expensive do YOU want 'em to be?
+              </p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button id="accordion-button-5" aria-expanded="false">
+              <span class="accordion-title">How reliable are we?</span>
+              <span class="icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-content">
+              <p id="paragraph">
+                Can you see an 'R' in FastLane? ye...JK...yes we are reliable
+                Trust me brothaaa
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  
+  <footer class="footer">
+    <div class="container">
+     <div class="row">
+       <div class="footer-col">
+         <h4>company</h4>
+         <ul>
+           <li><a href="#about">about us</a></li>
+           <li><a href="#services">our services</a></li>
+         </ul>
+       </div>
+       <div class="footer-col">
+         <h4>get help</h4>
+         <ul>
+           <li><a href="#">FAQ</a></li>
+           <li><a href="#">shipping</a></li>
+           <li><a href="#">returns</a></li>
+           <li><a href="#">payment options</a></li>
+         </ul>
+       </div>
+       <div class="footer-col">
+         <h4>follow us</h4>
+         <div class="social-links">
+           <a href="#"><i class="fab fa-facebook-f"></i></a>
+           <a href="#"><i class="fab fa-twitter"></i></a>
+           <a href="https://www.instagram.com/fastlanegarageofficial/"><i class="fab fa-instagram"></i></a> 
+         </div>
+       </div>
+     </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggleMenuBtn = document.querySelector(".toggle-menu-btn");
+    const navBarLinks = document.querySelector(".navbar-links");
+    const items = document.querySelectorAll('.accordion button');
+    
+    toggleMenuBtn.addEventListener("click", () => {
+      navBarLinks.classList.toggle("active");
+      toggleMenuBtn.classList.toggle("active");
+    });
+
+    function toggleAccordion() {
+      const itemToggle = this.getAttribute('aria-expanded');
+
+      for (i = 0; i < items.length; i++) {
+        items[i].setAttribute('aria-expanded', 'false');
+      }
+
+      if (itemToggle == 'false') {
+        this.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    items.forEach((item) => item.addEventListener('click', toggleAccordion));
+  </script>
+</body>
+</html>

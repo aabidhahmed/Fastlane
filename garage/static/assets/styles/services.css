@@ -1,0 +1,46 @@
+.services-container {
+  margin: 2rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: var(--primary-white-color);
+}
+
+.services-container h2{
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.7rem;
+}
+
+.service-card {
+  background-size: cover;
+  background-position: left;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../images/ecu-tablet.jpg'); 
+  color: white;
+  cursor: pointer;
+  width: 250px;
+  margin: 1rem;
+  padding: 2rem 1rem 1rem 1rem;
+  text-align: center;
+  border-radius: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.service-card:hover {
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.4);
+  transform: scale(1.025);
+}
+
+.service-card a {
+  color: var(--primary-wite-color);
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .services-container {
+    width: 90%;
+    padding: 0;
+  }
+}

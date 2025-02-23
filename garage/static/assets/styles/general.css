@@ -1,0 +1,39 @@
+:root {
+  --primary-black-color: #161616;
+  --primary-red-color: brown;
+  --primary-white-color: #fafafa;
+}
+
+.about-section,
+.hero,
+.nav-container,
+.services-container,
+.footer .container,
+.faq .container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header, main, footer {
+  width: 100%;
+}
+
+header {
+  background-color: var(--primary-color);
+}
+
+#paragraph {
+  font-size: 1rem;
+}
