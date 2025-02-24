@@ -36,6 +36,10 @@
           <li><a href="#services">Services</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#">Contact</a></li>
+          {% if user.is_staff %}
+            <li><a href="{% url 'admin:index' %}" class="admin-button">Admin Panel</a></li>
+          {% endif %}
+
         </ul>
       </div>
     </nav>
