@@ -1,14 +1,59 @@
 from django.utils.html import format_html
-from django.contrib import admin, messages  # ✅ Import messages properly
-from django.shortcuts import redirect  # ✅ Needed for filtering action redirects
+from django.contrib import admin
+from django.utils import timezone
+from django import forms
+from django.forms.widgets import DateTimeInput
 
 from .models import Job, Service, Payment, InventoryItem
+from datetime import datetime
+
+class CustomDateTimeInput(DateTimeInput):
+    input_type = 'datetime-local'
+    def __init__(self, **kwargs):
+        kwargs.setdefault('format', '%Y-%m-%dT%H:%M')
+        super().__init__(**kwargs)
+
+    def format_value(self, value):
+        if value is None:
+            return ''
+        if timezone.is_aware(value):
+            value = timezone.localtime(value)
+        return value.strftime(self.attrs.get('format', '%Y-%m-%dT%H:%M'))
+
+
+class JobAdminForm(forms.ModelForm):
+    class Meta:
+        model = Job
+        fields = '__all__'
+
+    def clean_date_in(self):
+        date_in = self.cleaned_data.get('date_in')
+
+        if isinstance(date_in, str):  
+            try:
+                date_in = datetime.fromisoformat(date_in)
+            except ValueError:
+                raise forms.ValidationError("Invalid date format. Please enter a valid date.")
+
+        if date_in and timezone.is_naive(date_in):
+            date_in = timezone.make_aware(date_in, timezone.get_current_timezone())
+
+        return date_in
 
 
 class PaymentInline(admin.TabularInline):
     model = Payment
     extra = 1  
-    readonly_fields = ('date',)
+    readonly_fields = ('date', 'total_amount_due')
+
+    def total_amount_due(self, obj):
+        """Displays the total amount still due for the job."""
+        if obj and obj.job:
+            total_due = obj.job.total_amount() - obj.job.amount_paid()
+            return f"${total_due:.2f}" if total_due > 0 else "$0.00"
+        return "-"
+
+    total_amount_due.short_description = "Total Amount Due"
 
 
 class ServiceInline(admin.TabularInline):
@@ -20,10 +65,11 @@ class ServiceInline(admin.TabularInline):
     def available_stock(self, obj):
         """Display available stock for the selected inventory item."""
         if obj.part:
+            color = "green" if obj.part.quantity > 5 else "red"
             return format_html(
-                '<span style="color:{};">{}</span>',
-                "green" if obj.part.quantity > 5 else "red",
-                f"{obj.part.quantity} left"
+                '<span style="color:{};">{} left</span>',
+                color,
+                obj.part.quantity
             )
         return "N/A"
 
@@ -31,7 +77,6 @@ class ServiceInline(admin.TabularInline):
 
 
 class PaymentStatusFilter(admin.SimpleListFilter):
-    """✅ Add a filter to make payment status filtering work properly"""
     title = 'Payment Status'
     parameter_name = 'payment_status'
 
@@ -50,15 +95,13 @@ class PaymentStatusFilter(admin.SimpleListFilter):
 
 @admin.register(Job)
 class JobAdmin(admin.ModelAdmin):
-    list_display = (
-        "customer_name", "vehicle_reg", "total_amount_display",
-        "amount_paid_display", "payment_status_colored"  # ✅ Added colored status
-    )
-    list_filter = ('status', PaymentStatusFilter)  # ✅ Proper filtering
+    form = JobAdminForm
+    list_display = ("customer_name", "vehicle_reg", "date_in", "total_amount_display", "amount_paid_display", "payment_status_colored")
+    list_filter = ('status', PaymentStatusFilter)
     search_fields = ('customer_name', 'vehicle_reg')
     ordering = ('-date_in',)
     inlines = [ServiceInline, PaymentInline]
-    actions = ['mark_completed', 'mark_not_completed']
+    fields = ('customer_name', 'vehicle_reg', 'status', 'date_in')
 
     def total_amount_display(self, obj):
         return f"${obj.total_amount():.2f}"
@@ -69,7 +112,6 @@ class JobAdmin(admin.ModelAdmin):
     amount_paid_display.short_description = "Amount Paid"
 
     def payment_status_colored(self, obj):
-        """✅ Show colored status in the admin list"""
         colors = {
             "fully_paid": "green",
             "partially_paid": "orange",
@@ -83,12 +125,9 @@ class JobAdmin(admin.ModelAdmin):
     payment_status_colored.short_description = "Payment Status"
 
 
-# ✅ Remove broken filtering actions (Use PaymentStatusFilter instead)
-
-
 @admin.register(InventoryItem)
 class InventoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'quantity', 'price', 'last_updated')
     list_filter = ('category',)
-    search_fields = ('name',)  # ✅ Removed 'supplier' (doesn't exist)
+    search_fields = ('name',)
     ordering = ('-last_updated',)

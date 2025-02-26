@@ -10,11 +10,9 @@ from .models import Job
 def home(request):
     return render(request, "index.html")
 
-
 #This part is confirmed yet, we can remove it later
 
 WEASYPRINT_TEMP_DIR = getattr(settings, 'WEASYPRINT_TEMP_DIR', tempfile.gettempdir())
-
 
 def print_jobsheet(request, job_id):
     """
