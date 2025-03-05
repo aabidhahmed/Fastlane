@@ -36,6 +36,9 @@
           <li><a href="#services">Services</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#">Contact</a></li>
+          {% if user.is_staff %}
+            <li><a href="{% url 'admin:index' %}" class="admin-button">Admin Panel</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>
@@ -155,7 +158,6 @@
     </div>
   </main>
 
-  
   <footer class="footer">
     <div class="container">
      <div class="row">
@@ -183,6 +185,14 @@
            <a href="https://www.instagram.com/fastlanegarageofficial/"><i class="fab fa-instagram"></i></a> 
          </div>
        </div>
+       {% if user.is_staff %}
+       <div class="footer-col">
+         <h4>Admin Panel</h4>
+         <ul>
+           <li><a href="{% url 'admin:index' %}">Go to Admin Panel</a></li>
+         </ul>
+       </div>
+       {% endif %}
      </div>
     </div>
   </footer>
