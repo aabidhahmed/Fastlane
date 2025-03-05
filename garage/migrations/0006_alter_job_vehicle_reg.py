@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='job',
             name='vehicle_reg',
-            field=models.CharField(help_text='Format: XX-00-XX-0000 (e.g., KA-05-AJ-6807)', max_length=13, validators=[django.core.validators.RegexValidator(code='invalid_vehicle_reg', message='Enter a valid vehicle registration number (e.g., KA-05-AJ-6807).', regex='^[A-Z]{2}-[0-7][0-9]-[A-Z]{2}-\\d{4}$')]),
+            field=models.CharField(help_text='Format: XX-00-XX-0000 (e.g., KA-05-AJ-6807)', max_length=13, validators=[django.core.validators.RegexValidator(code='invalid_vehicle_reg', message='Enter a valid vehicle registration number (e.g., KA-05-AJ-6807).', regex='^[A-Z]{2}-[0-7][0-9]-[A-Z]{2}-\\d{4}₹')]),
         ),
     ]
